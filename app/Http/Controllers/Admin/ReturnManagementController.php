@@ -46,11 +46,11 @@ class ReturnManagementController extends Controller
         }
 
         $return->update([
-            'status' => 'approved',
-            'approved_at' => now(),
-            'refund_amount' => $return->order->final_amount,
-            'refund_status' => 'processing'
-        ]);
+    'status' => 'approved',
+    'approved_at' => now(),
+    'refund_amount' => $return->order->final_amount,
+    'refund_status' => 'pending'
+]);
 
         return response()->json([
             'message' => 'Return approved successfully',
@@ -94,11 +94,10 @@ class ReturnManagementController extends Controller
         }
 
         $return->update([
-            'status' => 'completed',
-            'refund_status' => 'refunded',
-            'completed_at' => now()
-        ]);
-
+    'status' => 'completed',
+    'refund_status' => 'refunded',
+    'completed_at' => now(),
+]);
         return response()->json([
             'message' => 'Return completed successfully',
             'return' => $return
