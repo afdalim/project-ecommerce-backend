@@ -150,13 +150,16 @@ class ReturnController extends Controller
 
 
             'refund_amount' =>
-            0,
+0,
 
+'refund_status' =>
+'pending',
 
+'requested_at' =>
+now(),
 
-            'status' =>
-            'pending'
-
+'status' =>
+'requested'
 
         ]);
 
