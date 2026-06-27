@@ -61,19 +61,29 @@ class Return_ extends Model
         return $query->where('user_id', $userId);
     }
 
-    public function approveReturn(Request $request,$returnId)
+    public function approveReturn(Request $request, $returnId)
 {
     $return = Return_::findOrFail($returnId);
 
+    if (trim($return->status) !== 'requested') {
+        return response()->json([
+            'message' => 'Return cannot be approved',
+            'current_status' => $return->status
+        ], 400);
+    }
+
+    $return->update([
+        'status' => 'approved',
+        'approved_at' => now(),
+        'refund_amount' => $return->order->final_amount,
+        'refund_status' => 'processing'
+    ]);
+
     return response()->json([
-        'database_status' => $return->status,
-        'comparison_result' => ($return->status == 'requested'),
-        'refund_status' => $return->refund_status,
-        'order_status' => $return->order->status,
-        'payment_status' => $return->order->payment_status,
+        'message' => 'Return approved successfully',
+        'return' => $return
     ]);
 }
-
     public function rejectReturn(Request $request,$returnId)
 {
     $request->validate([
