@@ -65,21 +65,12 @@ class Return_ extends Model
 {
     $return = Return_::findOrFail($returnId);
 
-    if($return->status != 'requested'){
-        return response()->json([
-            'message' => 'Return cannot be approved'
-        ],400);
-    }
-
-    $return->approve();
-
-    $return->update([
-        'refund_amount' => $return->order->final_amount
-    ]);
-
     return response()->json([
-        'message' => 'Return approved successfully',
-        'return' => $return
+        'database_status' => $return->status,
+        'comparison_result' => ($return->status == 'requested'),
+        'refund_status' => $return->refund_status,
+        'order_status' => $return->order->status,
+        'payment_status' => $return->order->payment_status,
     ]);
 }
 
