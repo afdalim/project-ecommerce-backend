@@ -95,7 +95,7 @@ class ReturnManagementController extends Controller
 
         $return->update([
     'status' => 'completed',
-    'refund_status' => 'refunded',
+    'refund_status' => 'processed',
     'completed_at' => now(),
 ]);
         return response()->json([
