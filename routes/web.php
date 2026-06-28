@@ -85,6 +85,7 @@ Route::get('/product-image/{filename}', function ($filename) {
 
 });
 
+
 Route::get('/return-image/{filename}', function ($filename) {
 
     $path = storage_path(
