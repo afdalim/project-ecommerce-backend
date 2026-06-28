@@ -53,7 +53,11 @@ class PaymentController extends Controller
 
             $snapToken = $this->midtransService->createTransaction($order);
 
-            return response()->json([
+\Log::info('SNAP TOKEN RESULT', [
+    'snap_token' => $snapToken
+]);
+
+    return response()->json([
 
     'success' => true,
 
