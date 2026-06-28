@@ -145,7 +145,9 @@ class ProductManagementController extends Controller
 
 
             $imageUrl =
-            '/storage/' . $path;
+config('app.url')
+. '/storage/'
+. $path;
 
 
 
@@ -409,8 +411,10 @@ class ProductManagementController extends Controller
 
 
 
-            $data['image_url'] =
-            '/storage/' . $path;
+           $data['image_url'] =
+config('app.url')
+. '/storage/'
+. $path;
 
 
 
