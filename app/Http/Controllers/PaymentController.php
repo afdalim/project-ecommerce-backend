@@ -29,11 +29,11 @@ class PaymentController extends Controller
         ]);
 
         $order = Order::with(
-    'user',
-    'items.product'
-)->findOrFail(
-    $request->order_id
-);
+            'user',
+            'items.product'
+            )->findOrFail(
+            $request->order_id
+            );
 
         // Pastikan order milik user yang sedang login
         if ($order->user_id !== auth()->id()) {

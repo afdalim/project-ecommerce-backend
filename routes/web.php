@@ -65,7 +65,11 @@ Route::get('/admin', function () {
     return view('admin.dashboard');
 });
 
-// Catch-all for SPA
 Route::fallback(function () {
+
+    if (request()->is('storage/*')) {
+        abort(404);
+    }
+
     return view('welcome');
 });
