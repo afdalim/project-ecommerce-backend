@@ -65,6 +65,31 @@ Route::get('/admin', function () {
     return view('admin.dashboard');
 });
 
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+});
+
+use Illuminate\Support\Facades\Response;
+
+Route::get('/product-image/{filename}', function ($filename) {
+
+    $path = storage_path(
+        'app/public/products/' . $filename
+    );
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    return Response::file($path);
+
+});
+
+// Catch-all for SPA
+Route::fallback(function () {
+    return view('welcome');
+});
+
 Route::fallback(function () {
 
     if (request()->is('storage/*')) {
