@@ -85,9 +85,18 @@ Route::get('/product-image/{filename}', function ($filename) {
 
 });
 
-// Catch-all for SPA
-Route::fallback(function () {
-    return view('welcome');
+Route::get('/return-image/{filename}', function ($filename) {
+
+    $path = storage_path(
+        'app/public/returns/' . $filename
+    );
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    return response()->file($path);
+
 });
 
 Route::fallback(function () {
